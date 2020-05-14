@@ -1,0 +1,36 @@
+<p> Welcome back,<b><%= @current_user.username%></b>!</p>
+Right now it is <%= Time.now.strftime('%A') %>.
+
+  <% if @errors %>
+  <p style="color: red;"><%= @errors %></p>
+  <% end %>
+
+<h1>Your Current Inventory</h1>
+
+<br>
+
+<ul>
+      <% @items.each do |item| %>
+        <% if item.user_id == @current_user.id %>
+
+      <li>
+        <a href="/items/<%= item.title %>">
+        belongs to
+          <%= item.character %>.</a>
+
+          <%= item.date %>
+
+          <%= "%.2f" % item.description%>
+        </li>
+
+<br></br>
+<% end %>
+<% end %>
+
+    <a href="/items/new">Add new item!</a>
+        <% else %>
+            <p>You do not have any recorded items.
+    <a href="/items/new"> Add a new one!</a>
+            </p>
+        <% end %>
+</ul>

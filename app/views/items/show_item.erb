@@ -1,0 +1,26 @@
+<h1>What's Inside Your Haversack!</h1>
+
+<br></br>
+
+<h2><%= @item.title %></h2>
+
+<br>
+
+<p><b>Date:</b> <%= @item.date %></p>
+<p><b>Character:</b><%= @item.character %></p>
+<p><b>Description:</b> <%= @item.description %></p>
+
+<br>
+
+<a href="/items/<%= @item.id %>/edit">Edit Existing Item</a>
+
+<br></br>
+
+<form action="/items/<%= @item.id %>/delete" method="POST">
+  <input type="hidden" id="hidden" name="_method" value="DELETE"/>
+  <input type="submit" value="Delete Item">
+</form>
+
+<br></br>
+
+<a href="/items">View All Items</a>
