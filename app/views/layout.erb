@@ -19,6 +19,15 @@
         <%= yield %>
 
       <footer class="branding">
+
+        <small>&copy; 2020 <strong>Haversack</strong></small> /
+                <% if logged_in? %>
+                <small><strong><a href="/logout">Log Out</a></strong></small>
+        <% else %>
+                  <small><strong><a href="/login">Log In</a></strong></small> /
+                  <small><strong><a href="/signin">Sign Up</a></strong></small>
+                <% end %>
+
       </footer>
     </div>
 
