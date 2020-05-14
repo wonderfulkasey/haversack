@@ -1,0 +1,23 @@
+<form action="/login" method="post">
+
+<% if @errors %>
+ <p style="color: red;"><%= @errors %></p>
+<% end %>
+
+<form action="/login" method="POST">
+ <label for="username">Username:</label>
+ <input type="text" name="username" id="username"/>
+
+ <br><br>
+
+ <label for="password">Password:</label>
+ <input type="text" name="password" id="password"/>
+
+ <br><br>
+
+ <input type="submit" id="submit" value="Login"/>
+</form>
+
+ <br><br>
+
+ Need an account? <a href="/signup">Sign up!</a>

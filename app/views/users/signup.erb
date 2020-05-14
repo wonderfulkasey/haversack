@@ -1,0 +1,32 @@
+<h1>Sign Up</h1>
+ <form action="/signup" method="post">
+
+<% if @errors %>
+ <% @errors.each do |error| %>
+   <p style="color: red;"><%= error %></p>
+ <% end %>
+<% end %>
+
+<form action="/signup" method="POST">
+
+ <label for="username">Username:</label>
+ <input type="text" name="username" placeholder="Username"
+     required pattern="[0-9a-zA-Z_-]*" id="username"/>
+
+ <br></br>
+
+ <label for="email">Email:</label>
+ <input type="text" name="email" id="email"
+ placeholder="Email" required/>
+
+ <br></br>
+
+ <label for="password">Password:</label>
+ <input type="text" name="password"
+     placeholder="Password" required pattern="[0-9a-zA-Z_-]*"
+     id="password"/>
+
+ <br></br>
+
+ <input type="submit" value="Sign Up"/>
+</form>
