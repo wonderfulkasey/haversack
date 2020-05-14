@@ -19,7 +19,7 @@ class ApplicationController < Sinatra::Base
           if logged_in?
             redirect to('/index')
           else
-            erb :layout
+            erb :welcome
           end
         end
 
