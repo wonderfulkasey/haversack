@@ -1,0 +1,34 @@
+<h1>Edit An Existing Item!</h1>
+
+<% if @errors %>
+  <% @errors.each do |error| %>
+    <p style="color: red;"><%= error %></p>
+  <% end %>
+<% end %>
+
+<br></br>
+
+<form action="/items" method="POST">
+
+  <label for="title">Title: </label>
+  <input type="text" name="title" id="title"/>
+
+  <br></br>
+
+  <label for="date">Date: </label>
+  <input type="date" name="date" id="date"/>
+
+  <br></br>
+
+  <label for="character">Character: </label>
+  <input type="character" name="character" id="character"/>
+
+  <br></br>
+
+  <label for="description">Description: </label>
+  <input type="text" name="description" id="description"/>
+
+  <br></br>
+
+  <input type="submit" value="Edit Existing Item"/>
+</form>
