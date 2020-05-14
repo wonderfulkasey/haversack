@@ -1,23 +1,27 @@
-<form action="/login" method="post">
+<h1>Log In!</h1>
 
 <% if @errors %>
- <p style="color: red;"><%= @errors %></p>
+  <% @errors.each do |error| %>
+    <p style="color: red;"><%= error %></p>
+  <% end %>
 <% end %>
 
 <form action="/login" method="POST">
+
  <label for="username">Username:</label>
  <input type="text" name="username" id="username"/>
 
- <br><br>
+ <br></br>
 
  <label for="password">Password:</label>
  <input type="text" name="password" id="password"/>
 
- <br><br>
+ <br></br>
 
  <input type="submit" id="submit" value="Login"/>
 </form>
 
- <br><br>
+ <br></br>
 
  Need an account? <a href="/signup">Sign up!</a>
+ </form>
