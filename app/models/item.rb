@@ -4,4 +4,6 @@ class Item < ActiveRecord::Base
 
   validates :title, :character, :description, :date, presence: true
 
+#has_many :saved_recipes
+
 end
