@@ -1,5 +1,9 @@
 class UserController < ApplicationController
 
+  before do
+         require_login
+     end
+
  get '/signup' do
     if !session[:user_id]
       erb :'users/signup'
