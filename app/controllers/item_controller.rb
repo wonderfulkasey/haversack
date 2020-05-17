@@ -1,37 +1,33 @@
 class ItemController < ApplicationController
 
-#  before do
-#       require_login
-#   end
-
   get '/items' do
     if logged_in?
     @items = Item.all
     erb :'items/index'
-
   else
-
+ redirect to('/login')
   end
+end
 
   get '/items/new' do
     if logged_in?
+      @current_user
       erb :'items/create_item'
     else
-
+ redirect to('/login')
   end
+end
 
   post '/items' do
     if logged_in?
-      @item.user_id = current_user.items.build(params)
+      @item = current_user.items.build(params)
 
       if !@item.save
-        current_user.items << @item
+        @errors = @item.errors.full_messages
         erb :'/items/create_item'
       else
-        redirect to ('/items')
+        redirect to ('/login')
       end
-    else
-      redirect to ('/login')
   end
 
   get '/items/:id' do
