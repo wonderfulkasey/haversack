@@ -6,7 +6,7 @@ class ItemController < ApplicationController
 
   get '/items' do
     @items = Item.all
-    @items = @items.sort_by{|t| t.name}
+    @items = @items.sort_by{|item| item.title}
     erb :"items/index"
   end
 
