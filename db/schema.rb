@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20200514201919) do
 
   create_table "items", force: :cascade do |t|
     t.string  "title"
-    t.string  "description"
+    t.text    "description"
     t.date    "date"
     t.string  "character"
     t.integer "user_id"
