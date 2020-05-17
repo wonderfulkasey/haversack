@@ -43,12 +43,13 @@ class ItemController < ApplicationController
   end
 end
 
-  delete '/items/:id=' do
+  delete '/items/:id/delete' do
     @item = item.find(params[:id])
-
-    if recipe.user_id == current_user.id
+    if logged_in? && @expense.user == current_user
         @item.destroy
       redirect to('/items')
+    else
+      redirect to('/login')
     end
   end
 
@@ -57,7 +58,7 @@ end
       if logged_in? && @item.user == current_user
       @item = Item.find(params [:id])
       @user = User.find(session[:user_id])
-        erb :"items/edit"
+        erb :"items/edit_item"
      else
         redirect to('/login')
       end
@@ -65,18 +66,15 @@ end
 
   patch '/items/:id' do
     @item = Item.find(params[:id])
-
-    if @recipe.user_id == current_user.id
     @item.title = params[:title]
     @item.description = params[:description]
     @item.character = params[:character]
 
     if !@item.save
       @errors = @item.errors.full_messages
-      redirect "/items/#{@item.id}/edit_item"
+      erb :'/item/edit_item'
     else
-      redirect "/items/#{@item.id}/edit_item"
+      redirect "/items/#{@item.id}"
     end
   end
-end
 end
