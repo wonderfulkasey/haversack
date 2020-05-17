@@ -4,7 +4,7 @@ This application was created to track and save items from the users' Dungeons an
 
 This project was created as a part of the [Flatiron School's Online Web Developer program](https://flatiron-school.com).
 
-## Install instructions
+## Install Instructions
 1) clone this repo
 2) run 'bundle install'
 3) run 'rake db:migrate'
