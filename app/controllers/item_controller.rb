@@ -3,7 +3,7 @@ class ItemController < ApplicationController
   get '/items' do
     if logged_in?
     @items = Item.all
-    erb :'items/index'
+    redirect to('/items/index')
   else
  redirect to('/login')
   end
@@ -12,7 +12,7 @@ end
   get '/items/new' do
     if logged_in?
       @current_user
-      erb :'items/create_item'
+      redirect to('/items/create_item')
     else
  redirect to('/login')
   end
@@ -23,7 +23,7 @@ end
       @item = current_user.items.build(params)
 
       if !@item.save
-        erb :'/items/create_item'
+        redirect to('/items/create_item')
       else
         redirect to('/login')
       end
@@ -32,7 +32,7 @@ end
   get '/items/:id' do
     @item = Item.find_by(id: params[:id])
     if logged_in? && @item.user == current_user
-      erb :'items/show_item'
+      redirect to('/items/show_item')
   else
      redirect to('/login')
   end
@@ -53,7 +53,7 @@ end
       if logged_in? && @item.user == current_user
       @item = Item.find(params [:id])
       @user = User.find(session[:user_id])
-        erb :"items/edit_item"
+        redirect to(/"items/edit_item")
      else
         redirect to('/login')
       end
@@ -67,7 +67,7 @@ end
 
     if !@item.save
       @errors = @item.errors.full_messages
-      erb :'/item/edit_item'
+      redirect to('/item/edit_item')
     else
       redirect to("/items/#{@item.id}")
     end
