@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
   before do
-         require_login
+      #   require_login
      end
 
  get '/signup' do
