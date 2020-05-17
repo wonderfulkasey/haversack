@@ -4,7 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.string  :title
       t.text  :description
       t.string  :character
-      t.integer  :user_id
+      t.integer :user_id
     end
   end
 end
