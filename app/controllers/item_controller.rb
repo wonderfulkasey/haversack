@@ -1,8 +1,8 @@
 class ItemController < ApplicationController
 
-  before do
-       require_login
-   end
+#  before do
+#       require_login
+#   end
 
   get '/items' do
     @items = Item.all
