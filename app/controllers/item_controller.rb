@@ -28,8 +28,8 @@ end
 end
 
   get '/items/:id/edit' do
-      @item = Item.find(params[:id])
-      if logged_in? && @item.user == current_user
+      @item = Item.find_by_id(params[:item_id])
+      if item && @item.user_id == session[:user_id]
       @item = Item.find(params [:id])
       @user = User.find(session[:user_id])
         redirect to('/items/edit_item')
