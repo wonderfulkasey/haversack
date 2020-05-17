@@ -1,21 +1,19 @@
 <h1> Welcome back,<b><%= @current_user.username%></b>!</h1>
 
+<% if @errors %>
+  <p style="color: red;"><%= @errors %></p>
+<% end %>
+
 <h1>Your Current Inventory</h1>
-
 <br>
-
 <ul>
+      <% if @items.size > 0 %>
       <% @items.each do |item| %>
         <% if item.user_id == @current_user.id %>
 
-      <li>
+        <li>
         <a href="/items/<%= item.title %>">
-        belongs to
-          <%= item.character %>.</a>
-
-          <%= item.date %>
-
-          <%= "%.2f" % item.description%>
+        </a>
         </li>
 
 <br></br>
