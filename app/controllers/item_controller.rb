@@ -6,7 +6,6 @@ class ItemController < ApplicationController
 
   get '/items' do
     @items = Item.all
-    @items = @items.sort_by{|item| item.title}
     erb :"items/index"
   end
 
@@ -22,7 +21,7 @@ class ItemController < ApplicationController
         current_user.items << @item
         redirect '/items/#{@item.id}'
       else
-        redirect to('/items')
+        redirect '/items'
       end
   end
 
@@ -30,30 +29,45 @@ class ItemController < ApplicationController
     @item = Item.find_by(id: params[:id])
     if @item
       @user = User.find(@recipe.user_id)
-      erb: 'items/show_item'
+      erb :'items/show_item'
   else
      redirect "/items"
   end
+end
 
-get '/items/:id/edit' do
-    @item = Item.find(params[:id])
-    @user = User.find(@item.user_id)
-    if @item.user_id == current_user.id
-      erb :"items/edit"
-   else
-      redirect "/item/#{@item.id}"
-    end
-  end
-
-  delete '/items/:id/delete' do
+  delete '/items/:id=' do
     @item = item.find(params[:id])
-    if logged_in? && @item.user == current_user
-      @item.destroy
+
+    if recipe.user_id == current_user.id
+        @item.destroy
       redirect to('/items')
-    else
-      redirect to('/login')
     end
   end
 
+  get '/items/:id/edit' do
+      @item = Item.find(params[:id])
+      @user = User.find(@item.user_id)
+      if @item.user_id == current_user.id
+        erb :"items/edit"
+     else
+        redirect "/items/#{@item.id}"
+      end
+    end
 
+  patch '/items/:id' do
+    @item = Item.find(params[:id])
+
+    if @recipe.user_id == current_user.id
+    @item.title = params[:title]
+    @item.description = params[:description]
+    @item.character = params[:character]
+
+    if !@item.save
+      @errors = @item.errors.full_messages
+      redirect "/items/#{@item.id}/edit_item"
+    else
+      redirect "/items/#{@item.id}/edit_item"
+    end
+  end
+end
 end
