@@ -45,5 +45,5 @@ class UserController < ApplicationController
       session.destroy
       redirect to('/')
   end
-
+end
 end
