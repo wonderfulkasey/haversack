@@ -3,7 +3,6 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string  :title
       t.text  :description
-      t.date  :date
       t.string  :character
       t.integer  :user_id
     end
