@@ -8,16 +8,14 @@
 <h1>Your Current Inventory</h1>
 <br>
 <ul>
+      <!---<% if @items.size > 0 %> --->
       <% if @items.size > 0 %>
       <% @items.each do |item| %>
-        <% if item.user_id == @current_user.id %>
+        <%= item.title %> <br />
+        <%= item.description %> <br />
+        <%= item.character %> <br />
+        <a href="/items/<%=item.id%>/edit_item">Edit</a>
 
-        <li>
-        <a href="/items/<%= item.title %>">
-        </a>
-        </li>
-
-<br></br>
 <% end %>
 <% end %>
 
