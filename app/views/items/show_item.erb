@@ -6,21 +6,20 @@
 
 <br>
 
-<p><b>Date:</b> <%= @item.date %></p>
 <p><b>Character:</b><%= @item.character %></p>
 <p><b>Description:</b> <%= @item.description %></p>
 
 <br>
 
-<a href="/items/<%= @item.id %>/edit">Edit Existing Item</a>
+<a href="/items/<%= @item.id %>/edit_item">Edit Existing Item</a>
 
 <br></br>
 
-<form action="/items/<%= @item.id %>/delete" method="POST">
-  <input type="hidden" id="hidden" name="_method" value="DELETE"/>
+<form action="/items/<%= @item.id %>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete"/>
   <input type="submit" value="Delete Item">
 </form>
 
 <br></br>
 
-<a href="/items">View All Items</a>
+<a href="/index">View All Items</a>
