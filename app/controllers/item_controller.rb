@@ -41,16 +41,6 @@ end
   end
 end
 
-  delete '/items/:id/delete' do
-    @item = item.find(params[:id])
-    if logged_in? && @expense.user == current_user
-        @item.destroy
-      redirect to('/items')
-    else
-      redirect to('/login')
-    end
-  end
-
   get '/items/:id/edit' do
       @item = Item.find(params[:id])
       if logged_in? && @item.user == current_user
@@ -75,4 +65,16 @@ end
       redirect to('/items/#{@item.id}')
   end
 end
+
+delete '/items/:id/delete' do
+  @item = item.find(params[:id])
+  if logged_in? && @item.user == current_user
+      @item.destroy
+    redirect to('/items')
+  else
+    redirect to('/login')
+  end
+end
+
+
 end
