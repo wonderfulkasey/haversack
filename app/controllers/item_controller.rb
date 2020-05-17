@@ -5,33 +5,41 @@ class ItemController < ApplicationController
 #   end
 
   get '/items' do
+    if logged_in?
     @items = Item.all
-    erb :"items/index"
+    erb :'items/index'
+
+  else
+
   end
 
   get '/items/new' do
+    if logged_in?
       erb :'items/create_item'
+    else
+
   end
 
   post '/items' do
-      @item = Item.new(params)
-      @item.user_id = current_user.id
+    if logged_in?
+      @item.user_id = current_user.items.build(params)
 
       if !@item.save
         current_user.items << @item
-        redirect '/items/#{@item.id}'
+        erb :'/items/create_item'
       else
-        redirect '/items'
+        redirect to ('/items')
       end
+    else
+      redirect to ('/login')
   end
 
   get '/items/:id' do
     @item = Item.find_by(id: params[:id])
-    if @item
-      @user = User.find(@recipe.user_id)
+    if logged_in? && @item.user == current_user
       erb :'items/show_item'
   else
-     redirect "/items"
+     redirect ("/login")
   end
 end
 
@@ -46,11 +54,12 @@ end
 
   get '/items/:id/edit' do
       @item = Item.find(params[:id])
-      @user = User.find(@item.user_id)
-      if @item.user_id == current_user.id
+      if logged_in? && @item.user == current_user
+      @item = Item.find(params [:id])
+      @user = User.find(session[:user_id])
         erb :"items/edit"
      else
-        redirect "/items/#{@item.id}"
+        redirect to('/login')
       end
     end
 
