@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
 
-  has_many :items
-  validates :user, :email, presence: true
+     validates_presence_of :username, :email
+     validates_uniqueness_of :username, :email
+     has_secure_password
 
-  has_secure_password
+  has_many :items
 
 end
