@@ -25,9 +25,12 @@ end
       if !@item.save
         redirect to('/items/create_item')
       else
-        redirect to('/login')
+        redirect to('/items')
       end
+    else
+      redirect to('/login')
   end
+end
 
   get '/items/:id' do
     @item = Item.find_by(id: params[:id])
@@ -53,7 +56,7 @@ end
       if logged_in? && @item.user == current_user
       @item = Item.find(params [:id])
       @user = User.find(session[:user_id])
-        redirect to(/"items/edit_item")
+        redirect to('/items/edit_item')
      else
         redirect to('/login')
       end
@@ -69,8 +72,7 @@ end
       @errors = @item.errors.full_messages
       redirect to('/item/edit_item')
     else
-      redirect to("/items/#{@item.id}")
-    end
+      redirect to('/items/#{@item.id}')
   end
 end
 end
