@@ -1,21 +1,8 @@
-users = [
-(username: "caleb", email: "caleb@email.com", password: "fire"),
-(username: "jester", email: "jester@email.com", password: "ruby")
-]
 
-users.each do |user|
-  User.create(user)
-end
+caleb = User.create(username: "caleb", email: "caleb@email.com", password: "fire"),
+jester = User.create(username: "jester", email: "jester@email.com", password: "ruby")
 
-items = [
-  (title: "waterskin", description:"holds
-            water", character: "caleb"),
 
-  (title: "notebook",
-          description:"sketches inside",
-          character: "jester")
-    ]
+waterskin = Item.create(title: "waterskin", description:"holds water", character: "caleb"),
 
-    items.each do |item|
-      Item.create(item)
-    end
+notebook = Item.create(title: "notebook", description:"sketches inside", character: "jester")
