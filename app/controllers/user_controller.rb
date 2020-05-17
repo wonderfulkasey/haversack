@@ -1,8 +1,8 @@
 class UserController < ApplicationController
 
-  before do
+#  before do
       #   require_login
-     end
+     #end
 
  get '/signup' do
     if !session[:user_id]
@@ -32,10 +32,11 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-    @user = User.find_by(username: params[:username])
-    if @user && @user.authenticate(params[:password])
+    @ser = User.find_by(username: params[:username])
+
+      if user && user.authenticate(params[:password_digest])
       session[:user_id] = @user.id
-      redirect to('/items')
+      redirect '/items'
     else
       @errors = "Invalid username or password."
       erb :'users/login'
@@ -44,8 +45,6 @@ class UserController < ApplicationController
 
   get '/logout' do
     if logged_in?
-      @user = current_user
-      @user = nil
       session.destroy
       redirect to('/')
     else
@@ -53,4 +52,4 @@ class UserController < ApplicationController
     end
   end
 
-end
+#end
