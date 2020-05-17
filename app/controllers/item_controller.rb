@@ -1,43 +1,29 @@
 class ItemController < ApplicationController
 
-  get '/items' do
-    if logged_in?
-    @items = Item.all
-    redirect to('/items/index')
-  else
- redirect to('/login')
+  before do
+    redirect '/' unless logged_in?
   end
+
+  get '/items' do
+    @title = 'Items'
+    erb :'items/index'
 end
 
   get '/items/new' do
-    if logged_in?
-      @current_user
-      redirect to('/items/create_item')
-    else
- redirect to('/login')
-  end
+   @title = 'New Item'
+   erb :'items/create_item'
 end
 
   post '/items' do
-    if logged_in?
-      @item = current_user.items.build(params)
 
-      if !@item.save
-        redirect to('/items/create_item')
-      else
-        redirect to('/items')
-      end
-    else
-      redirect to('/login')
-  end
 end
 
   get '/items/:id' do
-    @item = Item.find_by(id: params[:id])
-    if logged_in? && @item.user == current_user
-      redirect to('/items/show_item')
+    @item = Item.find_by_id(params[:item_id])
+    if item && item.user_id == session[:user_id]
+      erb :'items/index'
   else
-     redirect to('/login')
+     redirect to('/items')
   end
 end
 
@@ -52,27 +38,15 @@ end
       end
     end
 
-  patch '/items/:id' do
-    @item = Item.find(params[:id])
-    @item.title = params[:title]
-    @item.description = params[:description]
-    @item.character = params[:character]
-
-    if !@item.save
-      @errors = @item.errors.full_messages
-      redirect to('/item/edit_item')
-    else
-      redirect to('/items/#{@item.id}')
-  end
-end
 
 delete '/items/:id/delete' do
-  @item = item.find(params[:id])
-  if logged_in? && @item.user == current_user
-      @item.destroy
+  @item = Item.find_by_id(params[:id])
+
+  if item && item.user_id == session[:user_id]
+      item.destroy
     redirect to('/items')
   else
-    redirect to('/login')
+    redirect to('/')
   end
 end
 
