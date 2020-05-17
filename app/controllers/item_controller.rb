@@ -1,54 +1,78 @@
 class ItemController < ApplicationController
 
-  before do
-    redirect '/' unless logged_in?
-  end
-
   get '/items' do
-    @title = 'Items'
-    erb :'items/index'
-end
+    if logged_in?
+      @items = current_user.items
+      erb :'items/index'
+    else
+      redirect to('/login')
+    end
+  end
 
   get '/items/new' do
-   @title = 'New Item'
-   erb :'items/create_item'
-end
+    if logged_in?
+      @current_user
+      erb :'items/create_item'
+    else
+      redirect to('/login')
+    end
+  end
 
   post '/items' do
-
-end
+    if logged_in?
+      @item = current_user.items.build(params)
+      if !@item.save
+        @errors = @item.errors.full_messages
+        erb :'/items/create_item'
+      else
+        redirect to('/items')
+      end
+    else
+      redirect to('/login')
+    end
+  end
 
   get '/items/:id' do
-    @item = Item.find_by_id(params[:item_id])
-    if item && item.user_id == session[:user_id]
-      erb :'items/index'
-  else
-     redirect to('/items')
+    @item = Item.find(params[:id])
+    if logged_in? && @item.user == current_user
+      erb :'items/show_item'
+    else
+      redirect to('/login')
+    end
   end
-end
 
   get '/items/:id/edit' do
-      @item = Item.find_by_id(params[:item_id])
-      if item && @item.user_id == session[:user_id]
-      @item = Item.find(params [:id])
+    @item = Item.find(params[:id])
+    if logged_in? && @item.user == current_user
+      @item = Item.find(params[:id])
       @user = User.find(session[:user_id])
-        redirect to('/items/edit_item')
-     else
-        redirect to('/login')
-      end
+      erb :'items/edit_item'
+    else
+      redirect to('/login')
     end
-
-
-delete '/items/:id/delete' do
-  @item = Item.find_by_id(params[:id])
-
-  if item && item.user_id == session[:user_id]
-      item.destroy
-    redirect to('/items')
-  else
-    redirect to('/')
   end
-end
 
+  patch '/items/:id' do
+    @item = Item.find(params[:id])
+    @item.title = params[:title]
+    @item.description = params[:description]
+    @item.character = params[:character]
+    if !@item.save
+      @errors = @item.errors.full_messages
+      erb :'/items/edit_item'
+    else
+      redirect to("/items/#{@item.id}")
+    end
+  end
+
+  delete '/items/:id/delete' do
+    @item = Item.find(params[:id])
+    if logged_in? && @item.user == current_user
+      @item.destroy
+      redirect to('/items')
+    else
+      redirect to('/login')
+    end
+  end
 
 end
