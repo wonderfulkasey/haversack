@@ -23,10 +23,9 @@ end
       @item = current_user.items.build(params)
 
       if !@item.save
-        @errors = @item.errors.full_messages
         erb :'/items/create_item'
       else
-        redirect to ('/login')
+        redirect to('/login')
       end
   end
 
@@ -35,7 +34,7 @@ end
     if logged_in? && @item.user == current_user
       erb :'items/show_item'
   else
-     redirect ("/login")
+     redirect to('/login')
   end
 end
 
@@ -70,7 +69,8 @@ end
       @errors = @item.errors.full_messages
       erb :'/item/edit_item'
     else
-      redirect "/items/#{@item.id}"
+      redirect to("/items/#{@item.id}")
     end
   end
+end
 end
