@@ -51,6 +51,7 @@ end
 
 
                get '/items/:id/edit_item' do
+                 @item = Item.find(params[:id])
              if logged_in? && @item.user == current_user
                @item = Item.find(params[:id])
                @user = User.find(@item.user_id)
