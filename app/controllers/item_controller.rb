@@ -37,15 +37,15 @@ end
          end
 end
 
-           get '/items/:id' do
+          get '/items/:id' do
              @item = Item.find_by(id:params[:id])
     if logged_in? && @item.user == current_user
                erb :'items/show_item'
 
-               if @recipe
+               if @item
                  @user = User.find(@item.user_id)
-             else
-               redirect to('/items')
+               else
+              redirect to('/items')
              end
              else
                redirect to('/login')
@@ -61,7 +61,7 @@ end
              if @item.user_id == current_user.id
                erb :'items/edit_item'
              else
-               redirect to('/items/#{@item.id}')
+               redirect to('/items')
              end
              else
                redirect to('/login')
@@ -69,8 +69,8 @@ end
                end
 
 
-patch '/items/:id' do
-    @item = Item.find(params[:id])
+patch '/items' do
+   @item = Item.find(params[:id])
 
     if @item.user_id == current_user.id
     @item.title = params[:title]
@@ -81,7 +81,7 @@ patch '/items/:id' do
       @errors = @item.errors.full_messages
       erb :'/items/edit_item'
     else
-      redirect to("/items/#{@item.id}")
+      redirect to("/items")
     end
       end
 end
