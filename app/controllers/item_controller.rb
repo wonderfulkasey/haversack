@@ -23,21 +23,30 @@ end
      post '/items' do
          if logged_in?
            @item = current_user.items.build(params)
+
            if !@item.save
              @errors = @item.errors.full_messages
              erb :'/items/create_item'
+
            else
              redirect to('/items')
            end
+
          else
            redirect to('/login')
          end
 end
 
            get '/items/:id' do
-             @item = Item.find(params[:id])
-             if logged_in? && @item.user == current_user
+             @item = Item.find_by(id:params[:id])
+    if logged_in? && @item.user == current_user
                erb :'items/show_item'
+
+               if @recipe
+                 @user = User.find(@item.user_id)
+             else
+               redirect to('/items')
+             end
              else
                redirect to('/login')
              end
@@ -48,8 +57,12 @@ end
              @item = Item.find(params[:id])
              if logged_in? && @item.user == current_user
                @item = Item.find(params[:id])
-               @user = User.find(session[:user_id])
+               @user = User.find(@item.user_id)
+             if @item.user_id == current_user.id
                erb :'items/edit_item'
+             else
+               redirect to('/items/#{@item.id}')
+             end
              else
                redirect to('/login')
              end
@@ -58,9 +71,12 @@ end
 
 patch '/items/:id' do
     @item = Item.find(params[:id])
+
+    if @item.user_id == current_user.id
     @item.title = params[:title]
     @item.description = params[:description]
     @item.character = params[:character]
+
     if !@item.save
       @errors = @item.errors.full_messages
       erb :'/items/edit_item'
@@ -68,7 +84,7 @@ patch '/items/:id' do
       redirect to("/items/#{@item.id}")
     end
       end
-
+end
 
 delete '/items/:id/delete' do
     @item = Item.find(params[:id])
