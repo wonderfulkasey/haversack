@@ -1,14 +1,7 @@
 <h1>Edit An Existing Item!</h1>
 
-<% if @errors %>
-  <% @errors.each do |error| %>
-    <p style="color: red;"><%= error %></p>
-  <% end %>
-<% end %>
 
-<br></br>
-
-<form action="/items/<%= @item.id %>/edit_item" method="post">
+<form action="/items/<%= @item.id %>" method="post">
 
   <label for="title">Title: </label>
   <input type="text" name="title" id="title"/>
@@ -23,6 +16,9 @@
   <label for="description">Description: </label>
   <input type="text" name="description" id="description"/>
 
+  <br></br>
+  <input type="hidden" name="_method" value="delete">
+     <input type="submit" value="Delete This Book" />
   <br></br>
 
   <input type="submit" id="submit" value="Edit Existing Item"/>

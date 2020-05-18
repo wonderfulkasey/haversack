@@ -4,21 +4,10 @@
 
 <h2><%= @item.title %></h2>
 
-<br>
+<br></br>
 
 <p><b>Character:</b><%= @item.character %></p>
 <p><b>Description:</b> <%= @item.description %></p>
-
-<br>
-
-<a href="/items/<%= @item.id %>/edit_item">Edit Existing Item</a>
-
-<br></br>
-
-<form action="/items/<%= @item.id %>/delete" method="post">
-  <input type="hidden" id="hidden" name="_method" value="delete"/>
-  <input type="submit" value="Delete Item">
-</form>
 
 <br></br>
 
