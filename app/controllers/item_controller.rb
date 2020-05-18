@@ -48,16 +48,14 @@ delete '/items/:id' do
   redirect to("/items")
 end
 
-get '/items/:id' do
-   @item = Item.find_by(id:params[:id])
-if logged_in? && @item.user == current_user
-     erb :'items/show_item'
-
-   else
-     redirect to('/login')
-   end
-     end
-
+post '/items' do
+    if logged_in?
+      @item = Item.create(params["item"])
+      redirect to("/items/#{@item.id}")
+    else
+      redirect to('/login')
+    end
+end
 
 get '/items/new' do
    if logged_in?
@@ -68,38 +66,12 @@ get '/items/new' do
    end
 end
 
+get '/items/:id' do
+   @item = Item.find_by(id:params[:id])
+if logged_in? && @item.user == current_user
+     erb :'items/show_item'
 
-
-     post '/items' do
-         if logged_in?
-           @item = current_user.items.build(params)
-
-           if !@item.save
-             @errors = @item.errors.full_messages
-             erb :'/items/create_item'
-
-           else
-             redirect to('/items')
-           end
-
-         else
-           redirect to('/login')
-         end
-end
-
-
-
-
-
-
-
-delete '/items/:id' do
-    @item = Item.find(params[:id])
-    if logged_in? && @item.user == current_user
-      @item.destroy
-      redirect to('/items')
-    else
-      redirect to('/login')
-    end
-      end
-end
+   else
+     redirect to('/login')
+   end
+     end
