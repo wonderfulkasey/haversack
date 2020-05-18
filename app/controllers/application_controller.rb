@@ -7,6 +7,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :session_secret, "critrole" #ENV.fetch('SESSION_SECRET')
+    set :method_override, true
   end
 
   get "/" do
