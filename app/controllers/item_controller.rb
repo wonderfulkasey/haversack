@@ -1,12 +1,8 @@
 class ItemController < ApplicationController
 
   get '/items' do
-    if logged_in?
-      @items = current_user.items
+      @items = Item.all
       erb :'items/index'
-    else
-      redirect to('/login')
-end
 end
 
 get '/items/:id/edit_item' do
@@ -18,7 +14,7 @@ patch '/items/:id' do
    @item = Item.find(params[:id])
    @item.edit_item(params["item"])
    redirect to ("/items/#{@item.id}")
-  end
+
 end
 
 delete '/items/:id' do
@@ -42,3 +38,4 @@ get '/items/:id' do
 
 
      end
+end
