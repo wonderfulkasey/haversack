@@ -56,12 +56,12 @@ end
                get '/items/:id/edit_item' do
              @item = Item.find(params[:id])
              if logged_in? && @item.user == current_user
-               @item = Item.find(params[:id])
+               #@item = Item.find(params[:id])
                @user = User.find(@item.user_id)
              if @item.user_id == current_user.id
                erb :'items/edit_item'
              else
-               redirect to('/items/#{@item.id}')
+              redirect to('/items/#{@item.id}')
              end
              else
                redirect to('/login')
