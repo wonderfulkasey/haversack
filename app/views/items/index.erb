@@ -18,6 +18,11 @@
         <%= item.character %> <br />
         <a href="/items/<%=item.id%>/edit_item">Edit</a> <br />
 
+<form action="/items/<%=item.id%>/delete" method="post">
+  <input type="hidden" name="_method" value="delete"/>
+  <input type="submit" value="delete"/>
+</form>
+
 
 
         <% end %>
