@@ -15,18 +15,19 @@
         <%= item.title %> <br />
         <%= item.description %> <br />
         <%= item.character %> <br />
-        <a href="/items/<%=item.id%>/edit_item">Edit</a> <br />
 
-        <a href="/items/new">Add a new item!</a>
-        <form action="/items/new" method="patch">
+        <a href="/items/<%=item.id%>/edit_item">Add a new item!</a>
+        <form action="/items/<%=item.id%>/edit_item" method="patch">
           <input type="hidden" name="_method" value="edit"/>
-          <input type="submit" value="new item"/>
+          <input type="submit" value="edit"/>
         </form>
 
 <form action="/items/<%=item.id%>/delete" method="post">
   <input type="hidden" name="_method" value="delete"/>
   <input type="submit" value="delete"/>
 </form>
+<br> </br>
+
 
 
 
