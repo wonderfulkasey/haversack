@@ -16,7 +16,6 @@
         <%= item.description %> <br />
         <%= item.character %> <br />
 
-        <a href="/items/<%=item.id%>/edit_item">Add a new item!</a>
         <form action="/items/<%=item.id%>/edit_item" method="patch">
           <input type="hidden" name="_method" value="edit"/>
           <input type="submit" value="edit"/>
@@ -32,5 +31,8 @@
 
 
         <% end %>
+        <footer>
+          <a href="/items/new">Add a new item!</a>
+        </footer>
         <% end %>
 </ul>
