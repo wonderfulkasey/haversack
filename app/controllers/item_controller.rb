@@ -19,23 +19,39 @@ end
 
 delete '/items/:id' do
   @item = Item.find(params[:id])
-  @item.destroy
-  redirect to("/items")
+  if logged_in? && @item.user == current_user
+    @item.destroy
+    redirect to('/items')
+  else
+    redirect to('/login')
+  end
+
 end
 
 post '/items' do
-      @item = Item.create(params["item"])
-      redirect to("/items/#{@item.id}")
-end
+  if logged_in?
+       @item = current_user.items.build(params)
 
-get '/items/new' do
-   erb :'items/create_item'
+       if !@item.save
+         @errors = @item.errors.full_messages
+         erb :'/items/create_item'
+
+       else
+         redirect to('/items')
+       end
+
+     else
+       redirect to('/login')
+     end
 end
 
 get '/items/:id' do
    @item = Item.find_by(id:params[:id])
+   if logged_in? && @item.user == current_user
      erb :'items/show_item'
-
+   else
+        redirect to('/login')
 
      end
+end
 end
