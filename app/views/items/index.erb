@@ -7,15 +7,21 @@
 <h1>Your Current Inventory</h1>
 <br>
 <ul>
-  <a href="/items/new">Add a new item!</a>
-  <small><strong><a href="/logout">Log Out</a></strong></small>
 
+  <!---<small><strong><a href="/logout">Log Out</a></strong></small>
+--->
       <!---<% if @items.size > 0 %> --->
       <% @items.each do |item| %>
         <%= item.title %> <br />
         <%= item.description %> <br />
         <%= item.character %> <br />
         <a href="/items/<%=item.id%>/edit_item">Edit</a> <br />
+
+        <a href="/items/new">Add a new item!</a>
+        <form action="/items/new" method="patch">
+          <input type="hidden" name="_method" value="edit"/>
+          <input type="submit" value="new item"/>
+        </form>
 
 <form action="/items/<%=item.id%>/delete" method="post">
   <input type="hidden" name="_method" value="delete"/>
