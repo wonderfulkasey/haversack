@@ -29,6 +29,7 @@ p {
 a, a:active {
   color: #4cd958;
   text-decoration: none;
+  text-align: center;
 }
 
 a:visited {
