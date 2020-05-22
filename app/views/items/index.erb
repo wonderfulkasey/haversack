@@ -19,12 +19,12 @@
           <input type="submit" value="edit"/>
         </form>
 
-<form action="/items/<%=item.id%>/delete" method="post">
+<form method="post" action="/items/<%=item.id%>/delete">
   <input type="hidden" name="_method" value="delete"/>
   <input type="submit" value="delete"/>
 </form>
 
-<form action="/items/<%=item.id%>/show" method="post">
+<form method="post" action="/items/<%=item.id%>/show">
   <input type="hidden" name="_method" value="show"/>
   <input type="submit" value="show"/>
 </form>

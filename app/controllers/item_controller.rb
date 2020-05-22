@@ -25,7 +25,7 @@ post '/items' do
            if !@item.save
              current_user.items << @item
 
-             erb :'/items/#{@item.id}'
+             erb :'/items'
 
            else
             @errors = @item.errors.full_messages
@@ -77,7 +77,7 @@ patch '/items/:id' do
                       erb :'/items/edit'
 
                     else
-                      redirect to("/items/#{@item.id}")
+                      redirect "/items"
                       end
         else
           redirect "/items"
