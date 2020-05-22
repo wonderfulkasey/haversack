@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <head>
-<title>Haversack</title>
-  <link rel="stylesheet" href="/stylesheets/main.css" />
-  </head>
-  <body>
-    <div class="wrapper">
+    <title>Haversack</title>
+<link rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+
+<body>
+<div class="wrapper">
 
         <%= yield %>
 
-      <footer class="branding">
+<footer class="branding">
+<small>&copy; 2020 <strong>Haversack</strong></small> /
 
-        <small>&copy; 2020 <strong>Haversack</strong></small> /
-                <% if logged_in? %>
+                      <% if logged_in? %>
                 <small><strong><a href="/logout">Log Out</a></strong></small>
-        <% else %>
+                      <% else %>
                   <small><strong><a href="/login">Log In</a></strong></small> /
                   <small><strong><a href="/signup">Sign Up</a></strong></small>
-                <% end %>
+            <% end %>
 
-      </footer>
-    </div>
+</footer>
+</div>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!--[if lt IE 7]>
       <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
       <script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
     <![endif]-->
-  </body>
+</body>
 </html>
