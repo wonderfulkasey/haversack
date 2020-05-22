@@ -2,7 +2,7 @@ require './config/environment'
 
 class ApplicationController < Sinatra::Base
 
-  configure do
+configure do
     set :root, File.join(File.dirname(__FILE__), '..')
     set :views, File.join(root, "views")
     #set :public_folder, 'public'
@@ -10,26 +10,26 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "critrole" #ENV.fetch('SESSION_SECRET')
     set :method_override, true
-  end
+end
 
-  get "/" do
+get "/" do
     if logged_in?
       redirect to('/items')
     else
       erb :welcome
     end
-  end
+end
 
   helpers do
 
-    def current_user
+def current_user
       @current_user ||= User.find(session[:user_id])
-    end
+end
 
-    def logged_in?
+def logged_in?
       !!session[:user_id]
-    end
+end
 
-  end
+end
 
 end
