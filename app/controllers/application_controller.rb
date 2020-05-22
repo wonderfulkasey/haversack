@@ -6,7 +6,7 @@ configure do
     set :root, File.join(File.dirname(__FILE__), '..')
     set :views, File.join(root, "views")
     enable :sessions
-    set :session_secret, "critrole" #ENV.fetch('SESSION_SECRET')
+    set :session_secret, "critrole"
     set :method_override, true
 end
 
