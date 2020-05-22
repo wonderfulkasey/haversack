@@ -5,20 +5,20 @@
 
 
   <label for="title">Title: </label>
-  <input type="text" name="title" id="title"/>
+  <input type="text" name="title" value="<%= @item.title %>" id="title"/>
 
   <br></br>
 
   <label for="character">Character: </label>
-  <input type="text" name="character" id="character"/>
+  <input type="text" name="character" value="<%= @item.character %>" id="character"/>
 
   <br></br>
 
   <label for="description">Description: </label>
-  <input type="text" name="description" id="description"/>
+  <input type="text" name="description" value="<%= @item.description %>" id="description"/>
 
   <br></br>
-<input type="hidden" name="_method" value="patch">
-     <input type="submit" value="Edit This Item" />
+
+     <input type="submit" id="submit" value="Edit This Item" />
   <br></br>
 </form>
