@@ -10,12 +10,12 @@ Made By: <%= @user.username %>
 
 <br> </br>
 
-<form method="patch" action="/items/<%= @items.id %>"/edit>
+<form method="patch" action="/items/<%= @items.id %>/edit">
 <input id="hidden" type="hidden" name="_method" value="edit">
-<input type="submit" value="Edit Item>
+<input type="submit" value="Edit Item">
 </form>
 
-<form method="post" action="/items/<%= @items.id %>">
+<form action="/items/<%= @item.id %>" method="post">
 <input id="hidden" type="hidden" name="_method" value="DELETE">
 <input type="submit" value="Delete Item>
 </form>
