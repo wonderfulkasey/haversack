@@ -11,12 +11,13 @@ class UserController < ApplicationController
   post '/signup' do
     @user = User.new(params)
 
-            if !@user.save
-              @errors = @user.errors.full_messages
-              erb :'users/signup'
+            if user.save
+              session[:user_id] = user.id
+              redirect "/items"
+              
             else
-              session[:user_id] = @user.id
-              redirect '/items'
+               @errors = @user.errors.full_messages
+              redirect '/signup'
     end
   end
 
@@ -41,11 +42,9 @@ class UserController < ApplicationController
   end
 
   get '/logout' do
-            if logged_in?
+
               session.destroy
               redirect to('/')
 
-            #else?????
-          end
 end
 end
