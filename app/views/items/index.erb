@@ -8,10 +8,6 @@
 <br>
 <ul>
 
-  <!---<small><strong><a href="/logout">Log Out</a></strong></small>
---->
-      <!---<% if @items.size > 0 %> --->
-
     <% @items.each do |item| %>
       <p>  <%= item.title %> </br>
      <%= item.description %></br>
@@ -36,5 +32,4 @@
         <footer>
           <a href="/items/new">Add a new item!</a>
         </footer>
-        <% end %>
 </ul>

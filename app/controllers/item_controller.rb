@@ -42,7 +42,7 @@ end
     if logged_in? && @item.user == current_user
                erb :'items/show_item'
 
-               if @recipe
+               if @item
                  @user = User.find(@item.user_id)
              else
                redirect to('/items')
