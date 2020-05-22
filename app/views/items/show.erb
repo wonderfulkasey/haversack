@@ -1,13 +1,25 @@
-<h1>What's Inside Your Haversack!</h1>
+<h1><%= item.title %></h1>
 
 <br></br>
 
-<h2><%= @item.title %></h2>
+<p>Character:<%= @item.character %>
 
-<br></br>
+Description: <%= @item.description %></p>
 
-<p><b>Character:</b><%= @item.character %></p>
-<p><b>Description:</b> <%= @item.description %></p>
+Made By: <%= @user.username %>
+
+<br> </br>
+
+<form method="patch" action="/items/<%= @items.id %>"/edit>
+<input id="hidden" type="hidden" name="_method" value="edit">
+<input type="submit" value="Edit Item>
+</form>
+
+<form method="post" action="/items/<%= @items.id %>">
+<input id="hidden" type="hidden" name="_method" value="DELETE">
+<input type="submit" value="Delete Item>
+</form>
+
 
 <br></br>
 
