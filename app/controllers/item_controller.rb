@@ -48,7 +48,7 @@ get '/items/:id' do
         end
 end
 
-delete '/items/:id' do
+delete '/items/:id/delete' do
     @item = Item.find(params[:id])
 
               if logged_in? && @item.user == current_user
