@@ -48,8 +48,9 @@ get '/items/:id' do
         end
 end
 
-delete '/items/:id/delete' do
+delete '/items/:id' do
     @item = Item.find(params[:id])
+
               if logged_in? && @item.user == current_user
                 @item.destroy
                 redirect to('/items')
@@ -81,11 +82,11 @@ patch '/items/:id' do
             @item.character = params[:character]
 
                   if !@item.save
-                      @errors = @item.errors.full_messages
-                      erb :'/items/edit'
+                      redirect "/items/#{@item.id}"
 
                     else
-                      redirect "/items"
+                      @errors = @item.errors.full_messages
+                      redirect "/items/edit"
                       end
         else
           redirect "/items"
