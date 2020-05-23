@@ -67,6 +67,7 @@ get '/items/:id/edit' do
 
           else
             redirect to('/items')
+          end
 
       else
       redirect to('/login')
