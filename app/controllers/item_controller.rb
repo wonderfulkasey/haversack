@@ -23,13 +23,12 @@ post '/items' do
       @item = current_user.items.build(params)
 
            if !@item.save
-             current_user.items << @item
+               @errors = @item.errors.full_messages
+             #current_user.items << @item
 
-             erb :'/items'
+             erb :'/items/create'
 
            else
-            @errors = @item.errors.full_messages
-
              redirect to('/items')
            end
 
@@ -43,12 +42,18 @@ get '/items/:id' do
   @item = Item.find_by(id:params[:id])
 
         if logged_in? && @item.user == current_user
-               erb :'items/#{@item.id}/show'
+          erb :'items/show'
+
+        if @item
+          @user = User.find(@item.user.id)
         else
           redirect to('/items')
         end
-end
 
+      else
+        redirect to ('/login')
+end
+end
 
 
 get '/items/:id/edit' do
@@ -56,10 +61,15 @@ get '/items/:id/edit' do
 
       if logged_in? && @item.user == current_user
       @user = User.find(@item.user_id)
+
+          if @item.user.id == current_user.id
      erb :'items/edit'
 
+          else
+            redirect to('/items')
+
       else
-      redirect to('/items')
+      redirect to('/login')
       end
 end
 
@@ -84,7 +94,7 @@ patch '/items/:id' do
       end
 end
 
-delete '/items/:id' do
+delete '/items/:id/delete' do
     @item = Item.find(params[:id])
               if logged_in? && @item.user == current_user
                 @item.destroy
