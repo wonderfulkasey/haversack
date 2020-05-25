@@ -1,27 +1,13 @@
 <h1>Your Haversack Item:</h1>
-<h1><%= item.title %></h1>
+<h1><%= @item.title %></h1>
 
 <br></br>
 
-<p>Character:<%= @item.character %>
+<p>Character:<%= @item.character %></p>
 
-Description: <%= @item.description %>
+<p> Description: <%= @item.description %></p>
 
-Made By: <%= @user.username %> </p>
 
 <br> </br>
-
-<form action="/items/<%= @items.id %>/edit" method="patch">
-<input id="hidden" type="hidden" name="_method" value="edit">
-<input type="submit" value="Edit Item">
-</form>
-
-<form action="/items/<%= @item.id %>" method="post">
-<input id="hidden" type="hidden" name="_method" value="DELETE">
-<input type="submit" value="Delete Item">
-</form>
-
-
-<br></br>
 
 <a href="/items">View All Items</a>
