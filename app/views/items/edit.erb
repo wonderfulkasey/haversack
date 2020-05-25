@@ -2,7 +2,7 @@
 
 <br> </br>
 
-<form action="/items/<%= @item.id %>" method="patch">
+<form action="/items/<%= @item.id %>" method="post">
 
 
   <label for="title">Title: </label>
@@ -19,6 +19,6 @@
   <input type="text" name="description" value="<%= @item.description %>" id="description"/>
 
   <br></br>
-
+<input type="hidden" name="_method" value="patch">
      <input type="submit" id="submit" value="Edit This Item" />
 </form>
