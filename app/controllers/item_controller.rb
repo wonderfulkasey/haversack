@@ -36,6 +36,23 @@ end
 
 end
 
+post '/items/:id/show' do
+      if logged_in?
+        @item = current_user.items
+        erb :"items/show"
+
+            if @item
+              @user = User.find(@item.user_id)
+            else
+              redirect to('/items')
+            end
+
+          else
+            redirect to('/login')
+          end
+  end
+
+
 
 get '/items/:id' do
   @item = Item.find_by(id:params[:id])
@@ -51,18 +68,6 @@ get '/items/:id' do
 
         else
           redirect to('/login')
-      end
-end
-
-delete '/items/:id/delete' do
-    @item = Item.find(params[:id])
-
-              if logged_in? && @item.user == current_user
-                @item.destroy
-                redirect to('/items')
-             else
-                redirect to('/login')
-              end
       end
 end
 
@@ -83,6 +88,24 @@ get '/items/:id/edit' do
     end
 end
 
+get '/items/:id/show' do
+  @item = Item.find(params[:id])
+
+  if logged_in? && @item.user == current_user
+    @user = User.find(@item.user_id)
+
+         if @item.user_id == current_user.id
+           erb :"items/show"
+
+         else
+           redirect "/items"
+     end
+   else
+     redirect "/login"
+   end
+end
+
+
 
 patch '/items/:id' do
     @item = Item.find(params[:id])
@@ -93,13 +116,25 @@ patch '/items/:id' do
             @item.character = params[:character]
 
                   if !@item.save
-                      redirect "/items/#{@item.id}"
+                    @errors = @item.errors.full_messages
+                    erb :'/items/edit_item'
+                  else
+                    redirect to("/items/#{@item.id}")
+                  end
 
-                    else
-                      @errors = @item.errors.full_messages
-                      redirect "/items/edit"
-                      end
-        else
-          redirect "/items"
+           else
+              redirect "/items"
+      end
+end
+
+delete '/items/:id/delete' do
+    @item = Item.find(params[:id])
+
+              if logged_in? && @item.user == current_user
+                @item.destroy
+                redirect to('/items')
+             else
+                redirect to('/login')
+              end
       end
 end
