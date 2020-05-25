@@ -1,20 +1,18 @@
 <h1>Log In!</h1>
 
 <% if @errors %>
-  <% @errors.each do |error| %>
     <p style="color: red;"><%= error %></p>
-  <% end %>
 <% end %>
 
 <form action="/login" method="POST">
 
  <label for="username">Username:</label>
- <input type="text" name="username" placeholder="Username" id="username"/>
+ <input type="text" name="username" id="username" placeholder="Username" required/>
 
  <br></br>
 
  <label for="password">Password:</label>
- <input type="text" name="password" placeholder="Password" id="password"/>
+ <input type="text" name="password" id="password" placeholder="Password" required/>
 
  <br></br>
 
