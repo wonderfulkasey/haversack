@@ -24,10 +24,10 @@ post '/items' do
 
       if !@item.save
           @errors = @item.errors.full_messages
-          erb :'/items/create'
+          redirect '/items/#{@item.id}'
 
       else
-      redirect to('/items')
+      redirect '/items'
       end
 
    else
