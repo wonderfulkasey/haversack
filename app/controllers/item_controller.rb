@@ -19,21 +19,21 @@ get '/items/new' do
 end
 
 post '/items' do
-    if logged_in?
+  if logged_in?
       @item = current_user.items.build(params)
 
-           if !@item.save
-            current_user.items << @item
-             redirect "/items/#{@item.id}"
+      if !@item.save
+          @errors = @item.errors.full_messages
+          erb :'/items/create_item'
 
-           else
-             @errors = @item.errors.full_messages
-             redirect to('/items')
-           end
+      else
+      redirect to('/items')
+      end
 
-     else
-       redirect to('/login')
-    end
+   else
+      redirect to('/login')
+end
+
 end
 
 
@@ -41,11 +41,17 @@ get '/items/:id' do
   @item = Item.find_by(id:params[:id])
 
         if logged_in? && @item.user == current_user
-          @user = User.find(@item.user.id)
           erb :"items/show"
+
+              if @item
+                @user = User.find(@item.user_id)
+              else
+                redirect to('/items')
+              end
+
         else
-          redirect to('/items')
-        end
+          redirect to('/login')
+      end
 end
 
 delete '/items/:id/delete' do
