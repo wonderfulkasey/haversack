@@ -1,7 +1,7 @@
 class UserController < ApplicationController
 
  get '/signup' do
-    if !logged_in?
+   if !session[:user_id]
       erb :'users/signup'
     else
       redirect "/items"
@@ -11,13 +11,14 @@ class UserController < ApplicationController
   post '/signup' do
     @user = User.new(params)
 
-            if user.save
-              session[:user_id] = user.id
+            if !@user.save
+              @errors = @user.errors.full_messages
               redirect "/items"
-              
+              erb :'users/signup'
+
             else
-               @errors = @user.errors.full_messages
-              redirect '/signup'
+              session[:user_id] = user.id
+              redirect '/items'
     end
   end
 
@@ -43,8 +44,13 @@ class UserController < ApplicationController
 
   get '/logout' do
 
-              session.destroy
-              redirect to('/')
-
+    if logged_in?
+          @user = current_user
+          @user = nil
+          session.destroy
+          redirect '/'
+        else
+          redirect '/'
+        end
 end
 end
