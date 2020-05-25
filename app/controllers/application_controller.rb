@@ -14,7 +14,7 @@ get "/" do
     if logged_in?
       redirect to('/items')
     else
-      erb :welcome
+      erb :layout
     end
 end
 
