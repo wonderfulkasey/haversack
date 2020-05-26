@@ -1,14 +1,12 @@
 <h1>Put Away A New Item!</h1>
 
-<% if @errors %>
-  <% @errors.each do |error| %>
-    <p style="color: red;"><%= error %></p>
-  <% end %>
-<% end %>
-
 <br></br>
 
 <form action="/items" method="post">
+
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %><br><br>
+<% end %>
 
   <label for="title">Title: </label>
   <input type="text" name="title" id="title"
