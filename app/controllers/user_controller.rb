@@ -17,7 +17,7 @@ class UserController < ApplicationController
               erb :'users/signup'
 
             else
-              session[:user_id] = user.id
+              session[:user_id] = @user.id
               redirect '/items'
     end
   end
