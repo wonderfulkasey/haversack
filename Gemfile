@@ -11,7 +11,7 @@ gem 'shotgun'
 gem 'pry'
 gem 'bcrypt'
 gem 'tux'
-gem 'custom_error_message', '~> 1.1', '>= 1.1.1'
+gem 'rack-flash3', '~> 1.0', '>= 1.0.5'
 
 group :test do
   gem 'rspec'
