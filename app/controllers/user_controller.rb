@@ -37,6 +37,7 @@ class UserController < ApplicationController
               session[:user_id] = @user.id
               redirect "/items"
             else
+              @errors = "Invalid username or password."
               redirect "/login"
     end
   end
