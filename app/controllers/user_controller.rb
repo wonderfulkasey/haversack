@@ -11,7 +11,7 @@ class UserController < ApplicationController
   post '/signup' do
     @user = User.new(params)
 
-            if !@user.save
+            if @user.save
 
               session[:user_id] = @user.id
               redirect "/items"

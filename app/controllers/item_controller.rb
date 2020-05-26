@@ -27,12 +27,12 @@ post '/items' do
           erb :'/items/create'
 
       else
-      redirect '/items'
+          redirect '/items'
       end
 
-   else
+    else
       redirect to('/login')
-end
+    end
 
 end
 
