@@ -12,13 +12,13 @@ class UserController < ApplicationController
     @user = User.new(params)
 
             if !@user.save
-              @errors = @user.errors.full_messages
-              erb :'users/signup'
-
-            else
 
               session[:user_id] = @user.id
               redirect "/items"
+
+            else
+              user.errors.full_messages.each {|m| flash[:message] = m}
+              redirect "/signup"
     end
   end
 
@@ -37,7 +37,7 @@ class UserController < ApplicationController
               session[:user_id] = @user.id
               redirect "/items"
             else
-              @errors = "Invalid username or password."
+              flash[:message] = "Invalid username or password."
               redirect "/login"
     end
   end
