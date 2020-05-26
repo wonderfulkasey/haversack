@@ -40,7 +40,7 @@ get '/items/:id' do
   @item = Item.find_by(params[:id])
 
         if logged_in? && @item.user == current_user
-          erb :"items/show"
+          erb :'items/show'
         else
           redirect to('/login')
       end
@@ -50,8 +50,9 @@ get '/items/:id/edit' do
    @item = Item.find(params[:id])
 
    if logged_in? && @item.user == current_user
-     @user = User.find(@item.user_id)
-     erb :"items/edit"
+     @item = Item.find(params[:id])
+     @user = User.find(session[:user_id])
+     erb :'items/edit'
 
     else
       redirect "/login"
