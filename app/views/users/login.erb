@@ -1,12 +1,11 @@
 <h1>Log In!</h1>
 
-<% if @errors %>
-    <p style="color: red;">
-    <%= error %>
-  </p>
-  <% end %>
-
 <form action="/login" method="POST">
+
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %><br><br>
+<% end %>
+
 
  <label for="username">Username:</label>
  <input type="text" name="username" id="username" placeholder="Username" required/>

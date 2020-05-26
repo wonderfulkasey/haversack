@@ -1,12 +1,10 @@
 <h1>Sign Up!</h1>
 
-<% if @errors %>
-  <% @errors.each do |error| %>
-    <p style="color: red;"><%= error %></p>
-  <% end %>
-<% end %>
-
 <form action="/signup" method="POST">
+
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %><br><br>
+<% end %>
 
  <label for="username">Username:</label>
  <input type="text" name="username" placeholder="Username"
