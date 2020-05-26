@@ -13,13 +13,12 @@ class UserController < ApplicationController
 
             if !@user.save
               @errors = @user.errors.full_messages
-              #redirect "/items"
               erb :'users/signup'
 
             else
 
               session[:user_id] = @user.id
-              redirect '/items'
+              redirect "/items"
     end
   end
 
@@ -27,7 +26,7 @@ class UserController < ApplicationController
             if !session[:user_id]
               erb :'users/login'
             else
-              redirect '/items'
+              redirect "/items"
     end
   end
 
@@ -36,9 +35,9 @@ class UserController < ApplicationController
 
             if @user && @user.authenticate(params[:password])
               session[:user_id] = @user.id
-              redirect '/items'
+              redirect "/items"
             else
-              redirect '/login'
+              redirect "/login"
     end
   end
 
@@ -48,9 +47,9 @@ class UserController < ApplicationController
           @user = current_user
           @user = nil
           session.destroy
-          redirect '/'
+          redirect "/"
         else
-          redirect '/'
+          redirect "/"
         end
 end
 end
