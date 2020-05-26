@@ -6,9 +6,9 @@
 <ul>
 
     <% @items.each do |item| %>
-      <p>  <%= item.title %> </br>
+      <h1><b>  <%= item.title %> </br>
      <!---<%= item.description %></br>
-       <%= item.character %> ---> </p>
+       <%= item.character %> ---></b> </h1>
 
 
         <form action="/items/<%=item.id%>/edit" method="patch">
