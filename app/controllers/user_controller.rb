@@ -38,8 +38,6 @@ class UserController < ApplicationController
               session[:user_id] = @user.id
               redirect '/items'
             else
-              flash[:message] = "Unable to log you in, please try again. Or,
-                click \"Sign Up\" and create a new account."
               redirect '/login'
     end
   end

@@ -7,7 +7,7 @@ configure do
     set :root, File.join(File.dirname(__FILE__), '..')
     set :views, File.join(root, "views")
     enable :sessions
-    use Rack::Flash, :sweep => true
+    use Rack::Flash
     set :session_secret, "critrole"
     set :method_override, true
 end
