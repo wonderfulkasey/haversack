@@ -1,5 +1,11 @@
 <h1>Edit An Existing Item!</h1>
 
+<% if @errors %>
+  <% @errors.each do |error| %>
+    <p style="color: red;"><%= error %></p>
+  <% end %>
+<% end %>
+
 <br> </br>
 
 <form action="/items/<%= @item.id %>" method="post">
