@@ -1,11 +1,5 @@
 <h1>Sign Up!</h1>
 
-<% if @errors %>
-  <% @errors.each do |error| %>
-    <p style="color: red;"><%= error %></p>
-  <% end %>
-<% end %>
-
 <form action="/signup" method="POST">
 
  <label for="username">Username:</label>
