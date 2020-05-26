@@ -24,7 +24,7 @@ post '/items' do
 
       if !@item.save
           @errors = @item.errors.full_messages
-          redirect '/items/#{@item.id}'
+          erb :'/items/create'
 
       else
       redirect '/items'
@@ -37,7 +37,7 @@ end
 end
 
 get '/items/:id' do
-  @item = Item.find_by(id:params[:id])
+  @item = Item.find_by(params[:id])
 
         if logged_in? && @item.user == current_user
           erb :"items/show"
@@ -62,7 +62,6 @@ end
 
 patch '/items/:id' do
     @item = Item.find(params[:id])
-    @item.user_id == current_user.id
     @item.title = params[:title]
     @item.description = params[:description]
     @item.character = params[:character]
