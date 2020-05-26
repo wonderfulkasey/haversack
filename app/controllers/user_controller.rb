@@ -12,8 +12,8 @@ class UserController < ApplicationController
     @user = User.new(params)
 
             if !@user.save
-              #@errors = @user.errors.full_messages
-              redirect "/items"
+              @errors = @user.errors.full_messages
+              #redirect "/items"
               erb :'users/signup'
 
             else
