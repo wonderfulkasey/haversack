@@ -71,7 +71,7 @@ patch '/items/:id' do
               @errors = @item.errors.full_messages
               erb :'/items/edit'
           else
-              redirect "/items/#{@item.id}"
+              redirect to("/items/#{@item.id}")
           end
 end
 
