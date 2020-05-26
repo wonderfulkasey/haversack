@@ -37,7 +37,7 @@ end
 end
 
 get '/items/:id' do
-  @item = Item.find_by(params[:id])
+  @item = Item.find_by(id: params[:id])
 
         if logged_in? && @item.user == current_user
           erb :'items/show'
