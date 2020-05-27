@@ -12,10 +12,6 @@ configure do
     set :method_override, true
 end
 
-error do
-  redirect to('/')
-end
-
 get "/" do
     if logged_in?
       redirect to('/items')
@@ -23,6 +19,18 @@ get "/" do
       erb :welcome
     end
 end
+
+not_found do
+  status 404
+  erb :index
+end
+
+error do
+  'Sorry - you currently do not have access to this page.
+  Here is why - ' +
+  env['sinatra.error'].message
+end
+
 
   helpers do
 
