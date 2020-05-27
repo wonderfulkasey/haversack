@@ -1,15 +1,19 @@
 require './config/environment'
-require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
 
 configure do
     set :root, File.join(File.dirname(__FILE__), '..')
     set :views, File.join(root, "views")
+    set :raise_errors, false
+    set :show_exceptions, false
     enable :sessions
-    use Rack::Flash
     set :session_secret, "critrole"
     set :method_override, true
+end
+
+error do
+  redirect to('/')
 end
 
 get "/" do
