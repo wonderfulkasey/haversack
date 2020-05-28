@@ -2,10 +2,6 @@
 
 <form action="/login" method="POST">
 
-  <% if flash.has?(:message) %>
-    <%= flash[:message] %><br><br>
-<% end %>
-
 
  <label for="username">Username:</label>
  <input type="text" name="username" id="username" placeholder="Username" required/>

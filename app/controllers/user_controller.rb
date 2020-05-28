@@ -17,7 +17,6 @@ class UserController < ApplicationController
               redirect "/items"
 
             else
-              user.errors.full_messages.each {|m| flash[:message] = m}
               redirect "/signup"
     end
   end
@@ -37,7 +36,6 @@ class UserController < ApplicationController
               session[:user_id] = @user.id
               redirect "/items"
             else
-              flash[:message] = "Invalid username or password."
               redirect "/login"
     end
   end

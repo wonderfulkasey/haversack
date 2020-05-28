@@ -2,10 +2,6 @@
 
 <form action="/signup" method="POST">
 
-  <% if flash.has?(:message) %>
-    <%= flash[:message] %><br><br>
-<% end %>
-
  <label for="username">Username:</label>
  <input type="text" name="username" placeholder="Username"
       required pattern="[0-9a-zA-Z_-]*" id="username"/>
