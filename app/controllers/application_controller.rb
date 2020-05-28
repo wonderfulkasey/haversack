@@ -22,7 +22,7 @@ end
 
 not_found do
   status 404
-  erb :index
+  redirect to('/items')
 end
 
 error do

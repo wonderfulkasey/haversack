@@ -13,7 +13,7 @@
 
         <form action="/items/<%=item.id%>/edit" method="patch">
         <!---<input type="hidden" name="_method" value="edit"/> --->
-          <input type="submit">
+          <input type="submit" value="edit">
         </form>
 
 <form action="/items/<%=item.id%>/delete" method="post">
@@ -22,7 +22,6 @@
 </form>
 
 <form action="/items/<%=item.id%>" method="get">
-  <input type="hidden" name="_method" value="show"/>
   <input type="submit" value="show"/>
 </form>
 <br> </br>

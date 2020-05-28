@@ -27,7 +27,7 @@ post '/items' do
           erb :'/items/create'
 
       else
-          redirect '/items'
+          redirect to('/items')
       end
 
     else
@@ -66,7 +66,7 @@ get '/items/:id/edit' do
      erb :'items/edit'
 
     else
-      redirect "/login"
+      redirect to("/login")
     end
 end
 
