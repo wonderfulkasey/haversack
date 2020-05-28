@@ -1,34 +1,27 @@
 <h1> Welcome back, <b><%= @current_user.username%></b>!</h1>
-
-
+<br> </br>
 <h1>Your Current Inventory</h1>
-<br>
-<ul>
-
+  
+  <ul>
     <% @items.each do |item| %>
-      <h1><b>  <%= item.title %> </br>
-      </b> </h1>
-
-
+      <h1><b>  <%= item.title %></b></h1>   
         <form action="/items/<%=item.id%>/edit" method="patch">
-        <input type="submit" value="edit">
+          <input type="submit" value="edit">
         </form>
 
-<form action="/items/<%=item.id%>/delete" method="post">
-  <input type="hidden" name="_method" value="delete"/>
-  <input type="submit" value="delete"/>
-</form>
+        <form action="/items/<%=item.id%>/delete" method="post">
+          <input type="hidden" name="_method" value="delete"/>
+          <input type="submit" value="delete"/>
+        </form>
 
-<form action="/items/<%=item.id%>" method="get">
-  <input type="submit" value="show"/>
-</form>
-<br> </br>
+        <form action="/items/<%=item.id%>" method="get">
+          <input type="submit" value="show"/>
+        </form>
 
+            <br> </br>
 
-
-
-        <% end %>
+    <% end %>
         <footer>
           <a href="/items/new">Add a new item!</a>
         </footer>
-</ul>
+  </ul>

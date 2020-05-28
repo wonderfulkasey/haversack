@@ -9,6 +9,7 @@ class ItemController < ApplicationController
     end
   end
 
+
   get '/items/new' do
    if logged_in?
      @current_user
@@ -18,83 +19,73 @@ class ItemController < ApplicationController
    end
   end
 
-post '/items' do
-  if logged_in?
-      @item = current_user.items.build(params)
+
+  post '/items' do
+    if logged_in?
+     @item = current_user.items.build(params)
 
       if !@item.save
-          @errors = @item.errors.full_messages
-          erb :'/items/create'
-
+       @errors = @item.errors.full_messages
+       erb :'/items/create'
       else
-          redirect to('/items')
+         redirect to('/items')
       end
 
     else
       redirect to('/login')
     end
+  end
 
-end
 
-
-get '/items/:id' do
-  @item = Item.find_by(id: params[:id])
-
-       if logged_in? && @item.user == current_user
-          erb :'items/show'
-        else
-          redirect to('/login')
-     end
-end
-
-get '/items/:id/show' do
-  @item = Item.find_by(id: params[:id])
-
+  get '/items/:id' do
+    @item = Item.find_by(id: params[:id])
         if logged_in? && @item.user == current_user
           erb :'items/show'
         else
           redirect to('/login')
-      end
-end
+        end
+  end
 
-get '/items/:id/edit' do
-   @item = Item.find(params[:id])
+  get '/items/:id/show' do
+    @item = Item.find_by(id: params[:id])
+        if logged_in? && @item.user == current_user
+          erb :'items/show'
+        else
+          redirect to('/login')
+        end
+  end
 
-   if logged_in? && @item.user == current_user
-     @item = Item.find(params[:id])
-     @user = User.find(session[:user_id])
-     erb :'items/edit'
+  get '/items/:id/edit' do
+    @item = Item.find(params[:id])
+        if logged_in? && @item.user == current_user
+          @item = Item.find(params[:id])
+          @user = User.find(session[:user_id])
+          erb :'items/edit'
+        else
+          redirect to("/login")
+        end
+  end
 
-    else
-      redirect to("/login")
-    end
-end
-
-
-
-patch '/items/:id' do
+  patch '/items/:id' do
     @item = Item.find(params[:id])
     @item.title = params[:title]
     @item.description = params[:description]
     @item.character = params[:character]
+        if !@item.save
+          @errors = @item.errors.full_messages
+          erb :'/items/edit'
+        else
+          redirect to("/items/#{@item.id}")
+        end
+  end
 
-          if !@item.save
-              @errors = @item.errors.full_messages
-              erb :'/items/edit'
-          else
-              redirect to("/items/#{@item.id}")
-          end
-end
-
-delete '/items/:id/delete' do
+  delete '/items/:id/delete' do
     @item = Item.find(params[:id])
-
-              if logged_in? && @item.user == current_user
-                @item.destroy
-                redirect to('/items')
-             else
-                redirect to('/login')
-              end
-      end
-
+        if logged_in? && @item.user == current_user
+          @item.destroy
+          redirect to('/items')
+        else
+          redirect to('/login')
+        end
+  end
 end
