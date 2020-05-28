@@ -25,7 +25,7 @@ error do
 end
 
 
-  helpers do
+helpers do
 
 def current_user
       @current_user ||= User.find(session[:user_id])
@@ -34,11 +34,5 @@ end
 def logged_in?
       session[:user_id]
 end
-
-def require_login
-    unless logged_in?
-      redirect "/login"
-    end
-  end
 end
 end
