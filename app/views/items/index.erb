@@ -7,13 +7,11 @@
 
     <% @items.each do |item| %>
       <h1><b>  <%= item.title %> </br>
-     <!---<%= item.description %></br>
-       <%= item.character %> ---></b> </h1>
+      </b> </h1>
 
 
         <form action="/items/<%=item.id%>/edit" method="patch">
-        <!---<input type="hidden" name="_method" value="edit"/> --->
-          <input type="submit" value="edit">
+        <input type="submit" value="edit">
         </form>
 
 <form action="/items/<%=item.id%>/delete" method="post">

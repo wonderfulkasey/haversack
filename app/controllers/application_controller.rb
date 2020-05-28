@@ -22,13 +22,11 @@ end
 
 not_found do
   status 404
-  redirect to('/items')
+  erb :index
 end
 
 error do
-  'Sorry - you currently do not have access to this page.
-  Here is why - ' +
-  env['sinatra.error'].message
+  erb :error
 end
 
 
