@@ -24,11 +24,11 @@ class ItemController < ApplicationController
     if logged_in?
      @item = current_user.items.build(params)
 
-      if !@item.save
-       @errors = @item.errors.full_messages
-       erb :'/items/create'
-      else
+      if @item.save
          redirect to('/items')
+      else
+        @errors = @item.errors.full_messages
+        erb :'/items/create'
       end
 
     else

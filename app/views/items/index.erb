@@ -5,7 +5,7 @@
 <h1>Your Current Inventory</h1>
   <ul>
     <% @items.each do |item| %>
-      <h1><b>  <%= item.title %></b></h1>   
+      <h1><b>  <%= item.title %></b></h1>
         <form action="/items/<%=item.id%>/edit" method="patch">
           <input type="submit" value="edit">
         </form>
