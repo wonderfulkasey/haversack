@@ -1,5 +1,6 @@
 class ItemController < ApplicationController
 
+#1, crud - read
   get '/items' do
     if logged_in?
       @items = current_user.items
@@ -9,7 +10,7 @@ class ItemController < ApplicationController
     end
   end
 
-
+#2, crud - read, create
   get '/items/new' do
    if logged_in?
      @current_user
@@ -36,7 +37,7 @@ class ItemController < ApplicationController
     end
   end
 
-
+#3, crud - read specific id
   get '/items/:id' do
     @item = Item.find_by(id: params[:id])
         if logged_in? && @item.user == current_user
@@ -55,6 +56,7 @@ class ItemController < ApplicationController
         end
   end
 
+#4, crud - read/get form, patch updates
   get '/items/:id/edit' do
     @item = Item.find(params[:id])
         if logged_in? && @item.user == current_user
@@ -79,6 +81,7 @@ class ItemController < ApplicationController
         end
   end
 
+#5, crud - delete form
   delete '/items/:id/delete' do
     @item = Item.find(params[:id])
         if logged_in? && @item.user == current_user
