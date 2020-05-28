@@ -1,10 +1,13 @@
 <h1>Sorry - the page you have requested cannot be accessed.</h1>
-  <br></br>
-      <h2> Would you like to try one of these links instead?</h2>
 
-      <h2><% if logged_in? %>
-            <small><strong><a href="/items">Your Items</a></strong></small>
-          <% else %>
-            <small><strong><a href="/login">Log In</a></strong></small> /
-            <small><strong><a href="/signup">Sign Up</a></strong></small>
-          <% end %></h2>
+<br></br>
+
+<h2> Would you like to try one of these links instead?</h2>
+
+<h2> 
+  <% if logged_in? %>
+    <small><strong><a href="/items">Your Items</a></strong></small>
+  <% else %>
+    <small><strong><a href="/login">Log In</a></strong></small> /
+    <small><strong><a href="/signup">Sign Up</a></strong></small>
+  <% end %></h2>

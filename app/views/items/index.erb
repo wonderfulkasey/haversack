@@ -1,7 +1,8 @@
 <h1> Welcome back, <b><%= @current_user.username%></b>!</h1>
+
 <br> </br>
+
 <h1>Your Current Inventory</h1>
-  
   <ul>
     <% @items.each do |item| %>
       <h1><b>  <%= item.title %></b></h1>   
