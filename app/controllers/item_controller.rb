@@ -24,11 +24,11 @@ class ItemController < ApplicationController
     if logged_in?
      @item = current_user.items.build(params)
 
-      if @item.save
-         erb :items
+      if !@item.save
+       @errors = @item.errors.full_messages
+       erb :'/items/create'
       else
-        @errors = @item.errors.full_messages
-        redirect to('/items/create')
+         redirect to('/items')
       end
 
     else
@@ -83,9 +83,9 @@ class ItemController < ApplicationController
     @item = Item.find(params[:id])
         if logged_in? && @item.user == current_user
           @item.destroy
-          erb :'/items'
+          redirect to('/items')
         else
-          redirect to("/login")
+          redirect to('/login')
         end
   end
 end
