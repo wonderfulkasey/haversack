@@ -20,11 +20,6 @@ get "/" do
     end
 end
 
-not_found do
-  status 404
-  erb :index
-end
-
 error do
   erb :error
 end
@@ -37,7 +32,7 @@ def current_user
 end
 
 def logged_in?
-      !!session[:user_id]
+      session[:user_id]
 end
 
 def require_login
