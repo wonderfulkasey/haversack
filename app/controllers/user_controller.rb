@@ -1,10 +1,10 @@
 class UserController < ApplicationController
 
  get '/signup' do
-   if session[:user_id]
-      erb :items
+   if !session[:user_id]
+      erb :'users/signup'
     else
-      redirect "users/signup"
+      redirect "/items"
     end
   end
 
@@ -12,17 +12,17 @@ class UserController < ApplicationController
     @user = User.new(params)
       if @user.save
         session[:user_id] = @user.id
-        erb :items
+        redirect "/items"
       else
         redirect "/signup"
     end
   end
 
   get '/login' do
-    if session[:user_id]
-      erb :'items'
+    if !session[:user_id]
+     erb :'users/login'
     else
-      redirect "/login"
+      redirect "/items"
     end
   end
 
