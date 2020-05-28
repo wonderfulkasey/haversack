@@ -1,29 +1,23 @@
 class ItemController < ApplicationController
 
+
+
 #1, crud - read
   get '/items' do
-    if logged_in?
+      redirect_if_not_logged_in
       @items = current_user.items
       erb :'items/index'
-    else
-      redirect to('/login')
-    end
   end
 
 #2, crud - read, create
   get '/items/new' do
-   if logged_in?
      @current_user
      erb :'items/create'
-   else
-     redirect to('/login')
-   end
   end
 
 
   post '/items' do
-    if logged_in?
-     @item = current_user.items.build(params)
+       @item = current_user.items.build(params)
 
       if !@item.save
        @errors = @item.errors.full_messages
@@ -31,10 +25,6 @@ class ItemController < ApplicationController
       else
          redirect to('/items')
       end
-
-    else
-      redirect to('/login')
-    end
   end
 
 #3, crud - read specific id
