@@ -1,22 +1,22 @@
 class ItemController < ApplicationController
 
-get '/items' do
+  get '/items' do
     if logged_in?
       @items = current_user.items
       erb :'items/index'
     else
       redirect to('/login')
     end
-end
+  end
 
-get '/items/new' do
+  get '/items/new' do
    if logged_in?
      @current_user
      erb :'items/create'
    else
      redirect to('/login')
    end
-end
+  end
 
 post '/items' do
   if logged_in?
