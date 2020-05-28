@@ -20,6 +20,11 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  not_found do
+    status 404
+    erb :error
+  end
+
   error do
     erb :error
   end
@@ -34,5 +39,5 @@ class ApplicationController < Sinatra::Base
     end
 
   end
-  
+
 end
